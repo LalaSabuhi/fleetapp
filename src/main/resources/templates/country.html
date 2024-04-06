@@ -323,7 +323,7 @@
                         <span class="menu-arrow arrow_carrot-right"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="form_component.html">Form Elements</a></li>
+                        <li><a class="" th:href="@{/countries}">Countries</a></li>
                         <li><a class="" href="form_validation.html">Form Validation</a></li>
                     </ul>
                 </li>
@@ -400,7 +400,37 @@
                 </div>
             </div>
             <!-- page start-->
-            <h1> List of countries</h1>
+            <div class="row">
+                <div class="col-lg-12">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">New Country</button>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Description</th>
+                            <th>Capital</th>
+                            <th>Code</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody th:each="country:${countries}">
+                        <tr>
+                            <td th:text="${country.id}"></td>
+                            <td th:text="${country.description}"></td>
+                            <td th:text="${country.capital}"></td>
+                            <td th:text="${country.code}"></td>
+                            <td>
+                                <div class="btn-group">
+                                    <a th:href="@{/countries/findById/(id=${country.id})}" class="btn btn-primary" id="editButton">Edit</a>
+                                    <a th:href="@{/countries/delete/(id=${country.id})}" class="btn btn-danger" id="deleteButton">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <!-- page end-->
         </section>
     </section>
@@ -418,6 +448,115 @@
     </div>
 </section>
 <!-- container section end -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New Country</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/countries/addNew}" method="post">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Description:</label>
+                        <input type="text" class="form-control" id="recipient-name" name="description">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Capital:</label>
+                        <input type="text" class="form-control" id="recipient-name" name="capital">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Code:</label>
+                        <input type="text" class="form-control" id="recipient-name" name="code">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Continent:</label>
+                        <input type="text" class="form-control" id="recipient-name" name="continent">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Nationality:</label>
+                        <input type="text" class="form-control" id="recipient-name" name="nationality">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update Country</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/countries/update}" method="put">
+                    <div class="form-group">
+                        <label for="idEdit" class="col-form-label">ID:</label>
+                        <input type="text" class="form-control" id="idEdit" name="id">
+                    </div>
+                    <div class="form-group">
+                        <label for="descriptionEdit" class="col-form-label">Description:</label>
+                        <input type="text" class="form-control" id="descriptionEdit" name="description">
+                    </div>
+                    <div class="form-group">
+                        <label for="capitalEdit" class="col-form-label">Capital:</label>
+                        <input type="text" class="form-control" id="capitalEdit" name="capital">
+                    </div>
+                    <div class="form-group">
+                        <label for="codeEdit" class="col-form-label">Code:</label>
+                        <input type="text" class="form-control" id="codeEdit" name="code">
+                    </div>
+                    <div class="form-group">
+                        <label for="continentEdit" class="col-form-label">Continent:</label>
+                        <input type="text" class="form-control" id="continentEdit" name="continent">
+                    </div>
+                    <div class="form-group">
+                        <label for="nationalityEdit" class="col-form-label">Nationality:</label>
+                        <input type="text" class="form-control" id="nationalityEdit" name="nationality">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="deleteModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want tot delete this record?.</p>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary" id="confirmDeleteButton" th:href="">Save changes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- javascripts -->
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -426,6 +565,7 @@
 <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
 <!--custome script for all page-->
 <script src="js/scripts.js"></script>
+<script src="js/country.js"></script>
 
 
 </body>
