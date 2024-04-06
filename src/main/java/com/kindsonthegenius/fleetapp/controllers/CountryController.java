@@ -43,8 +43,9 @@ public class CountryController {
     }
 
     @RequestMapping(value="/countries/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
-    public String delete(@RequestParam Integer id) {
+    public String delete(@RequestParam int id) {
         countryService.delete(id);
         return "redirect:/countries";
     }
+
 }
