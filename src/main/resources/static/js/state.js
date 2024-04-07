@@ -1,12 +1,12 @@
 $('document').ready(function() {
 
-    $('.table #editButton').on('click',function(event){
+    $('.table .btn-primary').on('click',function(event){
         event.preventDefault();
         var href= $(this).attr('href');
         $.get(href, function(state, status){
             $('#idEdit').val(state.id);
             $('#ddlCountryEdit').val(state.countryid);
-            $('#capitalEdit').val(state.capipal);
+            $('#capitalEdit').val(state.capital);
             $('#codeEdit').val(state.code);
             $('#nameEdit').val(state.name);
             $('#detailsEdit').val(state.details);

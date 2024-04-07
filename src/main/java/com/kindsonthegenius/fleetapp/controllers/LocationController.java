@@ -35,12 +35,12 @@ public class LocationController {
 
 		return "location";
 	}
-	
-	@GetMapping("/findById")
+
+	@GetMapping("/findById/{id}")
 	@ResponseBody
-	public Optional<Location> findById(Integer id) {
+	public Optional<Location> findById(@PathVariable Integer id) {
 		return locationService.findById(id);
-	}		
+	}
 	
 	@GetMapping("/findByDescriptionContaining/{description}")
 	public List<Location> findByDescriptionContaining(@PathVariable("description") String description) {
@@ -58,9 +58,9 @@ public class LocationController {
 		locationService.save(location);
 		return "redirect:/locations";
 	}
-	
-	@RequestMapping(value="/delete", method = {RequestMethod.DELETE, RequestMethod.GET})	
-	public String deleteById(Integer id) {
+
+	@RequestMapping(value="/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
+	public String deleteById(@PathVariable Integer id) {
 		locationService.deleteById(id);
 		return "redirect:/locations";
 	}

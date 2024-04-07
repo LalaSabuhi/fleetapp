@@ -22,12 +22,12 @@ public class CountryController {
         return "country";
     }
 
-    @RequestMapping("countries/findById")
+    @RequestMapping("/countries/findById/{id}")
     @ResponseBody
-    public Optional<Country> findById(int id)
-    {
+    public Optional<Country> findById(@PathVariable Integer id) {
         return countryService.findById(id);
     }
+
 
     //Add Country
     @PostMapping(value="countries/addNew")
@@ -36,16 +36,17 @@ public class CountryController {
         return "redirect:/countries";
     }
 
-    @RequestMapping(value="countries/update", method = {RequestMethod.PUT, RequestMethod.GET})
+    @RequestMapping(value="countries/update/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
     public String update(Country country) {
         countryService.save(country);
         return "redirect:/countries";
     }
 
-    @RequestMapping(value="/countries/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
-    public String delete(@RequestParam int id) {
+    @RequestMapping(value="/countries/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
+    public String delete(@PathVariable int id) {
         countryService.delete(id);
         return "redirect:/countries";
     }
+
 
 }
