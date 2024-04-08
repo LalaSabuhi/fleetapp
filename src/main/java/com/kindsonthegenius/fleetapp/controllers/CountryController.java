@@ -36,7 +36,7 @@ public class CountryController {
         return "redirect:/countries";
     }
 
-    @RequestMapping(value="countries/update/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
+    @RequestMapping(value="countries/update", method = {RequestMethod.PUT, RequestMethod.GET})
     public String update(Country country) {
         countryService.save(country);
         return "redirect:/countries";

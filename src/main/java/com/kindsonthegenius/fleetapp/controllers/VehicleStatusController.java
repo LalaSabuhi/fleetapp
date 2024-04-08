@@ -5,11 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.kindsonthegenius.fleetapp.models.VehicleStatus;
 import com.kindsonthegenius.fleetapp.services.VehicleStatusService;
@@ -26,9 +22,9 @@ public class VehicleStatusController {
 		return "vehicleStatus";
 	}	
 	
-	@RequestMapping("vehicleStatuses/findById") 
+	@RequestMapping("vehicleStatuses/findById/{id}")
 	@ResponseBody
-	public Optional<VehicleStatus> findById(Integer id)
+	public Optional<VehicleStatus> findById(@PathVariable Integer id)
 	{
 		return vehicleStatusService.findById(id);
 	}
@@ -46,8 +42,8 @@ public class VehicleStatusController {
 		return "redirect:/vehicleStatuses";
 	}
 	
-	@RequestMapping(value="vehicleStatuses/delete", method = {RequestMethod.DELETE, RequestMethod.GET})	
-	public String delete(Integer id) {
+	@RequestMapping(value="vehicleStatuses/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
+	public String delete(@PathVariable Integer id) {
 		vehicleStatusService.delete(id);
 		return "redirect:/vehicleStatuses";
 	}

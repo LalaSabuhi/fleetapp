@@ -5,11 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.kindsonthegenius.fleetapp.models.EmployeeType;
 import com.kindsonthegenius.fleetapp.services.EmployeeTypeService;
@@ -26,9 +22,9 @@ public class EmployeeTypeController {
 		return "employeeType";
 	}	
 	
-	@RequestMapping("employeeTypes/findById") 
+	@RequestMapping("employeeTypes/findById/{id}")
 	@ResponseBody
-	public Optional<EmployeeType> findById(Integer id)
+	public Optional<EmployeeType> findById(@PathVariable Integer id)
 	{
 		return employeeTypeService.findById(id);
 	}
@@ -46,8 +42,8 @@ public class EmployeeTypeController {
 		return "redirect:/employeeTypes";
 	}
 	
-	@RequestMapping(value="employeeTypes/delete", method = {RequestMethod.DELETE, RequestMethod.GET})	
-	public String delete(Integer id) {
+	@RequestMapping(value="employeeTypes/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
+	public String delete(@PathVariable Integer id) {
 		employeeTypeService.delete(id);
 		return "redirect:/employeeTypes";
 	}

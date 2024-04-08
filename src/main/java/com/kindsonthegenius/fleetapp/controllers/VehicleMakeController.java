@@ -5,11 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.kindsonthegenius.fleetapp.models.VehicleMake;
 import com.kindsonthegenius.fleetapp.services.VehicleMakeService;
@@ -26,9 +22,9 @@ public class VehicleMakeController {
 		return "vehicleMake";
 	}	
 	
-	@RequestMapping("vehicleMakes/findById") 
+	@RequestMapping("vehicleMakes/findById/{id}")
 	@ResponseBody
-	public Optional<VehicleMake> findById(Integer id)
+	public Optional<VehicleMake> findById(@PathVariable Integer id)
 	{
 		return vehicleMakeService.findById(id);
 	}
@@ -46,8 +42,8 @@ public class VehicleMakeController {
 		return "redirect:/vehicleMakes";
 	}
 	
-	@RequestMapping(value="vehicleMakes/delete", method = {RequestMethod.DELETE, RequestMethod.GET})	
-	public String delete(Integer id) {
+	@RequestMapping(value="vehicleMakes/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
+	public String delete(@PathVariable Integer id) {
 		vehicleMakeService.delete(id);
 		return "redirect:/vehicleMakes";
 	}
