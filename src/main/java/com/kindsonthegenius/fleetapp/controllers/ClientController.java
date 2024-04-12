@@ -34,7 +34,7 @@ public class ClientController {
 		return "client";
 	}	
 	
-	@RequestMapping("clients/findById") 
+	@RequestMapping("clients/findById/{id}")
 	@ResponseBody
 	public Optional<Client> findById(Integer id)
 	{
@@ -48,13 +48,13 @@ public class ClientController {
 		return "redirect:/clients";
 	}	
 	
-	@RequestMapping(value="clients/update", method = {RequestMethod.PUT, RequestMethod.GET})
+	@RequestMapping(value="clients/update/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
 	public String update(Client client) {
 		clientService.save(client);
 		return "redirect:/clients";
 	}
 	
-	@RequestMapping(value="clients/delete", method = {RequestMethod.DELETE, RequestMethod.GET})	
+	@RequestMapping(value="clients/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
 	public String delete(Integer id) {
 		clientService.delete(id);
 		return "redirect:/clients";

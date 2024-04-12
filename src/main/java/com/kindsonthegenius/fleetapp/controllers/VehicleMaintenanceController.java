@@ -35,7 +35,7 @@ public class VehicleMaintenanceController {
 		return "vehicleMaintenance";
 	}	
 	
-	@RequestMapping("vehicleMaintenances/findById") 
+	@RequestMapping("vehicleMaintenances/findById/{id}")
 	@ResponseBody
 	public Optional<VehicleMaintenance> findById(Integer id)
 	{
@@ -55,7 +55,7 @@ public class VehicleMaintenanceController {
 		return "redirect:/vehicleMaintenances";
 	}
 	
-	@RequestMapping(value="vehicleMaintenances/delete", method = {RequestMethod.DELETE, RequestMethod.GET})	
+	@RequestMapping(value="vehicleMaintenances/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
 	public String delete(Integer id) {
 		vehicleMaintenanceService.delete(id);
 		return "redirect:/vehicleMaintenances";

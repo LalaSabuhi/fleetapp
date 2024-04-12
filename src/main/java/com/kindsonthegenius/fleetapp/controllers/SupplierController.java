@@ -32,7 +32,7 @@ public class SupplierController {
 		return "supplier";
 	}	
 	
-	@RequestMapping("suppliers/findById") 
+	@RequestMapping("suppliers/findById/{id}")
 	@ResponseBody
 	public Optional<Supplier> findById(Integer id)
 	{
@@ -52,7 +52,7 @@ public class SupplierController {
 		return "redirect:/suppliers";
 	}
 	
-	@RequestMapping(value="suppliers/delete", method = {RequestMethod.DELETE, RequestMethod.GET})	
+	@RequestMapping(value="suppliers/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
 	public String delete(Integer id) {
 		supplierService.delete(id);
 		return "redirect:/suppliers";

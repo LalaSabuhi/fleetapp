@@ -5,11 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.kindsonthegenius.fleetapp.models.Invoice;
 import com.kindsonthegenius.fleetapp.services.ClientService;
@@ -32,9 +28,9 @@ public class InvoiceController {
 		return "invoice";
 	}	
 	
-	@RequestMapping("invoices/findById") 
+	@RequestMapping("invoices/findById/{id}")
 	@ResponseBody
-	public Optional<Invoice> findById(Integer id)
+	public Optional<Invoice> findById(@PathVariable Integer id)
 	{
 		return invoiceService.findById(id);
 	}
@@ -52,8 +48,8 @@ public class InvoiceController {
 		return "redirect:/invoices";
 	}
 	
-	@RequestMapping(value="invoices/delete", method = {RequestMethod.DELETE, RequestMethod.GET})	
-	public String delete(Integer id) {
+	@RequestMapping(value="invoices/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
+	public String delete(@PathVariable  Integer id) {
 		invoiceService.delete(id);
 		return "redirect:/invoices";
 	}

@@ -24,7 +24,7 @@ public class ContactController {
 	@Autowired private StateService stateService;
 	@Autowired private CountryService countryService;	
 	@Autowired private ContactService contactService;
-	
+
 	//Get All Contacts
 	@GetMapping("/contacts")
 	public String findAll(Model model){		
@@ -34,7 +34,7 @@ public class ContactController {
 		return "contact";
 	}	
 	
-	@RequestMapping("contacts/findById") 
+	@RequestMapping("contacts/findById/{id}")
 	@ResponseBody
 	public Optional<Contact> findById(Integer id)
 	{
@@ -46,7 +46,7 @@ public class ContactController {
 	public String addNew(Contact contact) {
 		contactService.save(contact);
 		return "redirect:/contacts";
-	}	
+	}
 	
 	@RequestMapping(value="contacts/update", method = {RequestMethod.PUT, RequestMethod.GET})
 	public String update(Contact contact) {
@@ -54,7 +54,7 @@ public class ContactController {
 		return "redirect:/contacts";
 	}
 	
-	@RequestMapping(value="contacts/delete", method = {RequestMethod.DELETE, RequestMethod.GET})	
+	@RequestMapping(value="contacts/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
 	public String delete(Integer id) {
 		contactService.delete(id);
 		return "redirect:/contacts";

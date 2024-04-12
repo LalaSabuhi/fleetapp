@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Data
@@ -30,7 +31,8 @@ public class Vehicle {
 	private Integer vehicletypeid;	
 	
 	private String vehicleNumber;
-	
+
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date registrationDate;
 	
@@ -67,5 +69,9 @@ public class Vehicle {
 	private Location currentLocation;
 	private Integer locationid;
 	
-	private String remarks;	
+	private String remarks;
+
+	private String imageName;  // Image name
+	private byte[] image;  // Image bytes
+
 }

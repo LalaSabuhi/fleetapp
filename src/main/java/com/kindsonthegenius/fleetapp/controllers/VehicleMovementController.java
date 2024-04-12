@@ -33,7 +33,7 @@ public class VehicleMovementController {
 		return "vehicleMovement";
 	}	
 	
-	@RequestMapping("vehicleMovements/findById") 
+	@RequestMapping("vehicleMovements/findById/{id}")
 	@ResponseBody
 	public Optional<VehicleMovement> findById(Integer id)
 	{
@@ -53,7 +53,7 @@ public class VehicleMovementController {
 		return "redirect:/vehicleMovements";
 	}
 	
-	@RequestMapping(value="vehicleMovements/delete", method = {RequestMethod.DELETE, RequestMethod.GET})	
+	@RequestMapping(value="vehicleMovements/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
 	public String delete(Integer id) {
 		vehicleMovementService.delete(id);
 		return "redirect:/vehicleMovements";

@@ -11,6 +11,7 @@ import com.kindsonthegenius.fleetapp.repositories.VehicleRepository;
 
 @Service
 public class VehicleService {
+
 	
 	@Autowired
 	private VehicleRepository vehicleRepository;
